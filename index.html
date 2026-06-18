@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioPrüfung 10. Klasse – Full Edition</title>
+    <title>BioPrüfung 10 – Full Edition</title>
     <style>
         :root {
             --bg-color: #06060a;
@@ -17,275 +17,53 @@
             --success-color: #10b981;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-image: radial-gradient(circle at 50% 10%, #0f1f0e 0%, var(--bg-color) 70%);
-            overflow-y: scroll;
-            padding: 1rem;
-        }
-
-        header {
-            width: 100%;
-            max-width: 850px;
-            padding: 2rem 1rem 1rem 1rem;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        h1 span {
-            color: var(--accent-color);
-            text-shadow: 0 0 20px var(--accent-color);
-        }
-
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 1rem;
-            margin-top: 0.3rem;
-        }
-
-        main {
-            width: 100%;
-            max-width: 850px;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .mode-selector {
-            display: flex;
-            gap: 0.8rem;
-            background: var(--card-bg);
-            padding: 0.4rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(10px);
-        }
-
-        .mode-btn {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            padding: 0.8rem;
-            font-size: 0.95rem;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .mode-btn.active {
-            background: var(--accent-color);
-            color: #000;
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        .info-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--card-bg);
-            padding: 1rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        .progress-container {
-            flex: 1;
-            margin: 0 1.2rem;
-            background: rgba(255, 255, 255, 0.05);
-            height: 6px;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: var(--accent-color);
-            box-shadow: 0 0 10px var(--accent-color);
-            transition: width 0.3s ease;
-        }
-
-        .quiz-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .meta-layer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .category-badge {
-            background: rgba(57, 255, 20, 0.08);
-            color: var(--accent-color);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            border: 1px solid rgba(57, 255, 20, 0.2);
-        }
-
-        .subcategory-text {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            font-style: italic;
-        }
-
-        .question-text {
-            font-size: 1.35rem;
-            font-weight: 700;
-            line-height: 1.4;
-        }
-
-        .answer-container {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-        }
-
-        .answer-container.visible {
-            max-height: 1500px;
-            opacity: 1;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 1.5rem;
-        }
-
-        .answer-text {
-            color: #e2e8f0;
-            line-height: 1.6;
-            font-size: 1.05rem;
-            margin-bottom: 1.5rem;
-            white-space: pre-line;
-        }
-
-        .keyword-title {
-            font-size: 0.85rem;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .keywords-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .keyword-badge {
-            background: #0f172a;
-            color: #f8fafc;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.3rem 0.6rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-        }
-
-        .actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 1rem;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .btn-primary {
-            background: transparent;
-            border: 1px solid var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-color);
-            color: #000;
-            box-shadow: 0 0 15px var(--accent-glow);
-            transform: translateY(-2px);
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; align-items: center; background-image: radial-gradient(circle at 50% 10%, #0f1f0e 0%, var(--bg-color) 70%); overflow-y: scroll; padding: 1rem; }
+        header { width: 100%; max-width: 850px; padding: 2rem 1rem 1rem 1rem; text-align: center; }
+        h1 { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px var(--accent-glow); }
+        h1 span { color: var(--accent-color); text-shadow: 0 0 20px var(--accent-color); }
+        .subtitle { color: var(--text-muted); font-size: 1rem; margin-top: 0.3rem; }
+        main { width: 100%; max-width: 850px; display: flex; flex-direction: column; gap: 1.2rem; }
+        .mode-selector { display: flex; gap: 0.8rem; background: var(--card-bg); padding: 0.4rem; border-radius: 12px; border: 1px solid var(--border-color); backdrop-filter: blur(10px); }
+        .mode-btn { flex: 1; background: transparent; border: none; color: var(--text-muted); padding: 0.8rem; font-size: 0.95rem; font-weight: 700; border-radius: 8px; cursor: pointer; transition: all 0.25s ease; }
+        .mode-btn.active { background: var(--accent-color); color: #000; box-shadow: 0 0 15px var(--accent-glow); }
+        .info-bar { display: flex; justify-content: space-between; align-items: center; background: var(--card-bg); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); }
+        .progress-container { flex: 1; margin: 0 1.2rem; background: rgba(255, 255, 255, 0.05); height: 6px; border-radius: 3px; overflow: hidden; }
+        .progress-bar { height: 100%; width: 0%; background: var(--accent-color); box-shadow: 0 0 10px var(--accent-color); transition: width 0.3s ease; }
+        .quiz-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; backdrop-filter: blur(10px); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); display: flex; flex-direction: column; gap: 1.5rem; }
+        .meta-layer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .category-badge { background: rgba(57, 255, 20, 0.08); color: var(--accent-color); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; border: 1px solid rgba(57, 255, 20, 0.2); }
+        .subcategory-text { font-size: 0.85rem; color: var(--text-muted); font-style: italic; }
+        .question-text { font-size: 1.35rem; font-weight: 700; line-height: 1.4; }
+        .answer-container { max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; }
+        .answer-container.visible { max-height: 1500px; opacity: 1; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.5rem; }
+        .answer-text { color: #e2e8f0; line-height: 1.6; font-size: 1.05rem; margin-bottom: 1.5rem; white-space: pre-line; }
+        .keyword-title { font-size: 0.85rem; color: var(--accent-color); margin-bottom: 0.5rem; text-transform: uppercase; font-weight: 700; }
+        .keywords-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .keyword-badge { background: #0f172a; color: #f8fafc; border: 1px solid rgba(255, 255, 255, 0.1); padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.85rem; }
+        .actions { display: flex; gap: 1rem; }
+        .btn { flex: 1; padding: 1rem; border-radius: 10px; font-size: 1rem; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s ease; display: flex; justify-content: center; align-items: center; }
+        .btn-primary { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); }
+        .btn-primary:hover { background: var(--accent-color); color: #000; box-shadow: 0 0 15px var(--accent-glow); transform: translateY(-2px); }
         .btn-success { background: var(--success-color); color: #fff; }
         .btn-danger { background: var(--danger-color); color: #fff; }
         .btn-success:hover, .btn-danger:hover { transform: translateY(-2px); filter: brightness(1.1); }
-
         .hidden { display: none !important; }
-
-        .results {
-            text-align: center;
-            padding: 2.5rem;
-            background: var(--card-bg);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-        }
-
-        .score-circle {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 4px solid var(--accent-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.2rem;
-            font-weight: 900;
-            margin: 1.5rem auto;
-            box-shadow: 0 0 25px var(--accent-glow);
-        }
+        .results { text-align: center; padding: 2.5rem; background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border-color); }
+        .score-circle { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--accent-color); display: flex; justify-content: center; align-items: center; font-size: 2.2rem; font-weight: 900; margin: 1.5rem auto; box-shadow: 0 0 25px var(--accent-glow); }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Bio<span>Prüfung Pro</span></h1>
+        <h1>Bio<span>Prüfung 10</span></h1>
         <p class="subtitle">Vollständige MSA-Lernkartei mit allen Themenblöcken</p>
     </header>
 
     <main>
         <div class="mode-selector">
             <button class="mode-btn active" onclick="switchMode('flashcard')">Lernmodus (Zufallsmix)</button>
-            <button class="mode-btn" onclick="switchMode('exam')">Kurze Prüfungssimulation (10 Fragen)</button>
+            <button class="mode-btn" onclick="switchMode('exam')">Prüfungssimulation (10 Qs)</button>
         </div>
 
         <div class="info-bar">
@@ -329,7 +107,118 @@
     </main>
 
     <script>
-        // DIE VOLLSTÄNDIGE FRAGENDATENBANK AUS DEINEN ORIGINAL-PDF-EXTRAKTEN
         const fragenDatenbank = [
-            // ZELLBIOLOGIE & GENETIK
-            { kategorie: "Zellbiologie & Genetik", unterkategorie: "Mitose", frage: "Welche biologische Bedeutung hat die Mitose und wie lauten ihre Phasen?", antwort: "Die Mitose sorgt für das Wachstum des Organismus sowie für die Erneuerung und Reparatur verletzter oder gealterter Körperzellen. Dabei entstehen aus einer Mutterzelle zwei genet
+            { kategorie: "Genetik", unterkategorie: "Mitose", frage: "Welche biologische Bedeutung hat die Mitose und wie lauten ihre Phasen?", antwort: "Die Mitose sorgt für das Wachstum des Organismus sowie für die Erneuerung und Reparatur verletzter oder gealterter Körperzellen. Dabei entstehen aus einer Mutterzelle zwei genetisch absolut identische diploide Tochterzellen.\nDie Phasen lauten:\n1. Prophase (Chromosomen verdichten sich)\n2. Metaphase (Anordnung auf der Äquatorialebene)\n3. Anaphase (Trennung in Ein-Chromatid-Chromosomen zu den Polen)\n4. Telophase (Kernhüllen bilden sich neu).", begrriffe: ["Prophase", "Metaphase", "Anaphase", "Telophase", "diploid", "Äquatorialebene"] },
+            { kategorie: "Genetik", unterkategorie: "Meiose", frage: "Warum ist die Meiose für die geschlechtliche Fortpflanzung zwingend notwendig?", antwort: "Die Meiose (Reifeteilung) halbiert den Chromosomensatz von diploid (doppelt) auf haploid (einfach). Würde das nicht passieren, würde sich die Anzahl der Chromosomen bei jeder Befruchtung (Verschmelzung von Ei- und Samenzelle) verdoppeln. Außerdem sorgt sie durch das zufällige Verteilen väterlicher und mütterlicher Chromosomen sowie das Crossing-over für genetische Vielfalt.", begrriffe: ["haploid", "Reifeteilung", "Keimzellen", "Crossing-over", "Rekombination"] },
+            { kategorie: "Genetik", unterkategorie: "Chromosomen", frage: "Wie ist ein Chromosom aufgebaut?", antwort: "Ein fadenförmiges Chromosom im Ruhezustand besteht aus einer langen DNA-Doppelhelix, die um Proteine (Histone) gewickelt ist. Vor einer Zellteilung verdoppelt sich die DNA. Das Chromosom besteht dann aus zwei identischen Hälften, den sogenannten Chromatiden, die am zentralen Treffpunkt, dem Centromer, fest zusammengehalten werden.", begrriffe: ["Chromatid", "Centromer", "DNA-Doppelhelix", "Histone"] },
+            { kategorie: "Genetik", unterkategorie: "Mendelsche Regeln", frage: "Erkläre die 1. Mendelsche Regel anhand eines Beispiels.", antwort: "Die Uniformitätsregel besagt: Kreuzt man zwei Individuen einer Art, die sich in einem Merkmal unterscheiden, aber jeweils reinerbig (homozygot) sind, so sind alle Nachkommen der ersten Tochtergeneration (F1) in diesem Merkmal absolut gleich (uniform). Bei dominant-rezessiver Vererbung setzt sich das dominante Gen durch (z.B. alle F1-Erbsen sind rot).", begrriffe: ["Uniformität", "homozygot", "F1-Generation", "dominant", "rezessiv"] },
+            { kategorie: "Genetik", unterkategorie: "Mendelsche Regeln", frage: "Was besagt die 2. Mendelsche Regel (Spaltungsregel)?", antwort: "Kreuzt man die mischerbigen (heterozygoten) Individuen der F1-Generation untereinander, spalten sich die Merkmale in der F2-Generation in einem ganz bestimmten Zahlenverhältnis wieder auf. Bei einem dominant-rezessiven Erbgang ist das äußere Verhältnis (Phänotyp) immer 3:1 (z.B. 3 rote Blüten, 1 weiße Blüte).", begrriffe: ["heterozygot", "F2-Generation", "Spaltungsregel", "Phänotyp", "3:1-Verhältnis"] },
+            { kategorie: "Genetik", unterkategorie: "Mutationen", frage: "Was ist eine Mutation und was kann sie auslösen?", antwort: "Eine Mutation ist eine spontane oder durch äußere Einflüsse verursachte, dauerhafte Veränderung des genetischen Materials (der DNA). Findet sie in den Keimzellen statt, wird sie an Nachkommen vererbt. Ausgelöst werden Mutationen durch Mutagene wie UV-Strahlung, Röntgenstrahlung, radioaktive Belastungen oder chemische Stoffe (z.B. im Zigarettenrauch).", begrriffe: ["DNA-Veränderung", "Mutagene", "spontan", "erblich", "Genmutation"] },
+            { kategorie: "Genetik", unterkategorie: "Modifikation", frage: "Was unterscheidet die Modifikation fundamental von einer Mutation?", antwort: "Eine Modifikation ist eine Veränderung des äußeren Erscheinungsbildes (Phänotyp) durch Umwelteinflüsse (Licht, Nahrung, Temperatur), ohne dass sich das Erbgut (Genotyp) verändert. Modifikationen sind daher niemals vererbbar und finden nur innerhalb der genetisch vorgegebenen Reaktionsnorm statt (z.B. Muskelaufbau durch Sport oder Bräunung im Sommer).", begrriffe: ["Umwelteinfluss", "nicht vererbbar", "Phänotyp", "Genotyp bleibt gleich", "Reaktionsnorm"] },
+            { kategorie: "Ökologie", unterkategorie: "Ökosysteme", frage: "Aus welchen zwei Hauptkomponenten besteht ein Ökosystem? Erkläre sie.", antwort: "Ein Ökosystem besteht aus dem Biotop und der Biozönose.\n1. Das Biotop ist der unbelebte Lebensraum, der durch abiotische Faktoren wie Licht, Temperatur, Boden und Wasser bestimmt wird.\n2. Die Biozönose ist die lebende Gemeinschaft aller Organismen (Pflanzen, Tiere, Pilze), die in diesem Lebensraum wechselwirken.", begrriffe: ["Biotop", "Biozönose", "abiotisch", "biotisch", "Wechselwirkung"] },
+            { kategorie: "Ökologie", unterkategorie: "Nahrungsbeziehungen", frage: "Erkläre die drei Trophieebenen (Produzent, Konsument, Destruent) eines Ökosystems.", antwort: "1. Produzenten (Erzeuger): Grüne Pflanzen, die über Fotosynthese energiereiche organische Stoffe aus unbelebten Stoffen aufbauen.\n2. Konsumenten (Verbraucher): Tiere, die Biomasse fressen (Pflanzenfresser = Primärkonsumenten, Fleischfresser = Sekundärkonsumenten).\n3. Destruenten (Zersetzer): Bakterien und Pilze, die totes organisches Material abbauen und wieder in anorganische Mineralsalze für die Pflanzen verwandeln.", begrriffe: ["Produzent", "Konsument", "Destruent", "Biomasse", "Mineralsalze"] },
+            { kategorie: "Ökologie", unterkategorie: "Energiefluss", frage: "Warum spricht man in der Ökologie von einem Energiefluss, aber von einem Stoffkreislauf?", antwort: "Stoffe (wie Kohlenstoff, Stickstoff, Wasser) werden durch Produzenten, Konsumenten und Destruenten immer wieder im Kreis geführt und wiederverwertet.\nEnergie hingegen geht auf jeder Stufe der Nahrungskette zu etwa 90% als Wärme, Atemverlust und Bewegung verloren (nur 10% werden weitergegeben). Es braucht daher ständig neue Energie von außen durch das Sonnenlicht – sie fließt durch das System.", begrriffe: ["Energiefluss", "Stoffkreislauf", "10%-Regel", "Wärmeverlust", "Sonnenenergie"] },
+            { kategorie: "Ökologie", unterkategorie: "Wechselbeziehungen", frage: "Was ist der genaue Unterschied zwischen Symbiose und Parasitismus?", antwort: "Bei einer Symbiose leben zwei verschiedene Arten zum gegenseitigen Vorteil zusammen (z.B. Biene und Blume oder Ameise und Blattlaus). Beide profitieren.\nBeim Parasitismus (Schmarotzertum) lebt ein Organismus (Parasit) einseitig auf Kosten eines anderen Organismus (Wirt). Der Wirt wird geschädigt, entkräftet oder krank, stirbt aber meistens nicht sofort.", begrriffe: ["gegenseitiger Nutzen", "Wirt", "Schädigung", "Parasit", "Zusammenleben"] },
+            { kategorie: "Ökologie", unterkategorie: "Ökologische Nische", frage: "Was besagt das Konkurrenzausschlussprinzip?", antwort: "Es besagt, dass zwei verschiedene Arten nicht dauerhaft im selben Lebensraum nebeneinander existieren können, wenn sie exakt die gleiche ökologische Nische (also die identischen Ansprüche an Nahrung, Brutplätze, Temperatur etc.) beanspruchen. Die konkurrenzstärkere Art wird die andere unweigerlich verdrängen, es sei denn, eine Art weicht aus.", begrriffe: ["Konkurrenz", "Verdrängung", "ökologische Nische", "Ansprüche", "Nischendifferenzierung"] },
+            { kategorie: "Evolution", unterkategorie: "Theorien", frage: "Wie unterscheidet sich Darwins Evolutionstheorie von der Theorie Lamarcks?", antwort: "Lamarck glaubte, dass Individuen sich aktiv anpassen. Häufig benutzte Organe entwickeln sich weiter, ungenutzte verkümmern. Diese im Leben erworbenen Eigenschaften werden vererbt.\nDarwin besagt, dass Individuen einer Art sich zufällig leicht unterscheiden (Variabilität) und es eine Überproduktion an Nachkommen gibt. Die Umwelt siebt aus (Selektion): Nur wer zufällig besser angepasst ist, überlebt (Survival of the fittest) und gibt seine Gene weiter.", begrriffe: ["Selektion", "Variabilität", "Lamarckismus", "Überproduktion", "natürliche Auslese"] },
+            { kategorie: "Evolution", unterkategorie: "Organe", frage: "Was versteht man unter homologen und analogen Organen?", antwort: "Homologe Organe haben den gleichen Grundbauplan aufgrund einer gemeinsamen Abstammung (Vorfahre), können aber heute komplett andere Funktionen erfüllen (z.B. Vogelflügel und Walflosse). Sie zeigen Verwandtschaft.\nAnaloge Organe haben verschiedene Baupläne, sehen aber wegen gleicher Umweltbedingungen ähnlich aus (Konvergenz) und erfüllen dieselbe Funktion (z.B. Maulwurfsgrashand und Maulwurfsgrille). Keine Verwandtschaft.", begrriffe: ["Homologie", "Analogie", "Grundbauplan", "Gemeinsamer Vorfahre", "Konvergenz"] },
+            { kategorie: "Immunbiologie", unterkategorie: "Abwehr", frage: "Wie unterscheidet sich die spezifische von der unspezifischen Immunabwehr?", antwort: "Die unspezifische Abwehr ist angeboren und reagiert sofort auf alle Eindringlinge (z.B. Fresszellen/Makrophagen verschlingen Erreger, Barrieren wie Haut/Magensäure schützen).\nDie spezifische Abwehr ist erlernt, braucht einige Tage Anlaufzeit, richtet sich dafür aber mit maßgeschneiderten Antikörpern exakt gegen ein einziges Antigen. Sie bildet Gedächtniszellen für lebenslangen Schutz.", begrriffe: ["Fresszellen", "spezifisch", "Antikörper", "Antigen", "Gedächtniszellen", "angeboren"] },
+            { kategorie: "Immunbiologie", unterkategorie: "Impfung", frage: "Erkläre den Unterschied zwischen einer aktiven und passiven Immunisierung.", antwort: "Aktiv (Vorsorge): Abgetötete oder abgeschwächte Erreger werden gespritzt. Der Körper bildet selbstständig Antikörper und Gedächtniszellen. Hält jahrelang, schützt aber erst nach Wochen.\nPassiv (Notfall): Fertige Antikörper (oft aus Tieren) werden verabreicht. Sie wirken sofort gegen den Erreger, bauen sich aber nach wenigen Wochen ab, da der Körper keine eigenen Gedächtniszellen bildet.", begrriffe: ["Aktive Impfung", "Passive Impfung", "Heilserum", "Langzeitschutz", "Sofortwirkung"] }
+        ];
+
+        let aktuelleFragen = [];
+        let index = 0;
+        let gewusstZaehler = 0;
+        let aktuellerModus = 'flashcard';
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function initQuiz() {
+            let gemischterPool = shuffleArray([...fragenDatenbank]);
+            if(aktuellerModus === 'flashcard') {
+                aktuelleFragen = gemischterPool;
+                document.getElementById('status-right').innerText = "Modus: Alle Karteikarten";
+            } else {
+                aktuelleFragen = gemischterPool.slice(0, 10);
+                document.getElementById('status-right').innerText = "Modus: Prüfungssimulation";
+            }
+            index = 0;
+            gewusstZaehler = 0;
+            document.getElementById('quiz-section').classList.remove('hidden');
+            document.getElementById('result-section').classList.add('hidden');
+            showFrage();
+        }
+
+        function showFrage() {
+            if(index >= aktuelleFragen.length) { endQuiz(); return; }
+            const f = aktuelleFragen[index];
+            document.getElementById('category').innerText = f.kategorie;
+            document.getElementById('subcategory').innerText = f.unterkategorie;
+            document.getElementById('question').innerText = f.frage;
+            document.getElementById('answer').innerText = f.antwort;
+
+            const kwContainer = document.getElementById('keywords');
+            kwContainer.innerHTML = '';
+            f.begriffe.forEach(b => {
+                const badge = document.createElement('span');
+                badge.className = 'keyword-badge';
+                badge.innerText = b;
+                kwContainer.appendChild(badge);
+            });
+
+            document.getElementById('answer-box').classList.remove('visible');
+            document.getElementById('initial-actions').classList.remove('hidden');
+            document.getElementById('feedback-actions').classList.add('hidden');
+            document.getElementById('status-left').innerText = `Frage: ${index + 1}/${aktuelleFragen.length}`;
+            document.getElementById('progress').style.width = `${(index / aktuelleFragen.length) * 100}%`;
+        }
+
+        function revealAnswer() {
+            document.getElementById('answer-box').classList.add('visible');
+            document.getElementById('initial-actions').classList.add('hidden');
+            document.getElementById('feedback-actions').classList.remove('hidden');
+        }
+
+        function submitFeedback(warRichtig) {
+            if(warRichtig === true) gewusstZaehler++;
+            index++;
+            showFrage();
+        }
+
+        function switchMode(modus) {
+            aktuellerModus = modus;
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            if(modus === 'flashcard') {
+                document.querySelectorAll('.mode-btn')[0].classList.add('active');
+            } else {
+                document.querySelectorAll('.mode-btn')[1].classList.add('active');
+            }
+            initQuiz();
+        }
+
+        function endQuiz() {
+            document.getElementById('quiz-section').classList.add('hidden');
+            document.getElementById('result-section').classList.remove('hidden');
+            const prozent = Math.round((gewusstZaehler / aktuelleFragen.length) * 100);
+            document.getElementById('score-display').innerText = `${prozent}%`;
+            document.getElementById('progress').style.width = `100%`;
+
+            let note = "", feedback = "";
+            if(prozent >= 90) { note = "Note: 1"; feedback = "Hervorragend! Du hast alle Fachbegriffe perfekt drauf. Du bist bereit!"; }
+            else if(prozent >= 75) { note = "Note: 2"; feedback = "Sehr gutes Ergebnis! Die biologischen Abläufe hast du voll verstanden."; }
+            else if(prozent >= 50) { note = "Note: 3-4"; feedback = "Bestanden. Aber wiederhole am besten noch einmal, um exakter zu werden."; }
+            else { note = "Ungenügend"; feedback = "Nutze den Karteikarten-Modus und sage die Begriffe laut auf."; }
+            document.getElementById('result-text').innerHTML = `Du hast <b>${gewusstZaehler} von ${aktuelleFragen.length}</b> Fragen gewusst.<br><br><span style="font-size:1.3rem;color:var(--accent-color);font-weight:bold;">${note}</span><br>${feedback}`;
+        }
+
+        function restartQuiz() { initQuiz(); }
+        window.onload = initQuiz;
+    </script>
+</body>
+</html>
