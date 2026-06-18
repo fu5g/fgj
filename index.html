@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioPrüfung 100 – Master Edition</title>
+    <title>BioPrüfung 10. Klasse – Full Edition</title>
     <style>
         :root {
-            --bg-color: #050508;
-            --card-bg: rgba(14, 14, 22, 0.85);
+            --bg-color: #06060a;
+            --card-bg: rgba(15, 15, 25, 0.85);
             --accent-color: #39ff14;
             --accent-glow: rgba(57, 255, 20, 0.25);
             --text-main: #ffffff;
             --text-muted: #94a3b8;
-            --border-color: rgba(57, 255, 20, 0.15);
+            --border-color: rgba(57, 255, 20, 0.2);
             --danger-color: #ef4444;
             --success-color: #10b981;
         }
@@ -38,7 +38,7 @@
 
         header {
             width: 100%;
-            max-width: 900px;
+            max-width: 850px;
             padding: 2rem 1rem 1rem 1rem;
             text-align: center;
         }
@@ -64,7 +64,7 @@
 
         main {
             width: 100%;
-            max-width: 900px;
+            max-width: 850px;
             display: flex;
             flex-direction: column;
             gap: 1.2rem;
@@ -278,14 +278,14 @@
 <body>
 
     <header>
-        <h1>Bio<span>Prüfung 100</span></h1>
-        <p class="subtitle">Interaktives Lernportal für den Realschulabschluss</p>
+        <h1>Bio<span>Prüfung Pro</span></h1>
+        <p class="subtitle">Vollständige MSA-Lernkartei mit allen Themenblöcken</p>
     </header>
 
     <main>
         <div class="mode-selector">
-            <button class="mode-btn active" onclick="switchMode('flashcard')">Karteikarten-Modus (Alle Fragen)</button>
-            <button class="mode-btn" onclick="switchMode('exam')">Zufällige Prüfungssimulation</button>
+            <button class="mode-btn active" onclick="switchMode('flashcard')">Lernmodus (Zufallsmix)</button>
+            <button class="mode-btn" onclick="switchMode('exam')">Kurze Prüfungssimulation (10 Fragen)</button>
         </div>
 
         <div class="info-bar">
@@ -306,12 +306,12 @@
                 
                 <div class="answer-container" id="answer-box">
                     <div class="answer-text" id="answer">Antwortbereich...</div>
-                    <div class="keyword-title">💡 Diese Fachbegriffe musst du nennen:</div>
+                    <div class="keyword-title">💡 Wichtige Fachbegriffe für die Note 1:</div>
                     <div class="keywords-list" id="keywords"></div>
                 </div>
 
                 <div class="actions" id="initial-actions">
-                    <button class="btn btn-primary" onclick="revealAnswer()">Antwort aufdecken</button>
+                    <button class="btn btn-primary" onclick="revealAnswer()">👁️ Antwort aufdecken</button>
                 </div>
                 <div class="actions hidden" id="feedback-actions">
                     <button class="btn btn-danger" onclick="submitFeedback(false)">❌ Nicht gewusst</button>
@@ -324,131 +324,12 @@
             <h2>Auswertung abgeschlossen</h2>
             <div class="score-circle" id="score-display">0%</div>
             <p id="result-text">Ergebnis-Details</p>
-            <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="restartQuiz()">Erneut starten</button>
+            <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="restartQuiz()">🔄 Erneut starten</button>
         </div>
     </main>
 
     <script>
-        // =========================================================================
-        // FRAGEN-POOL: Hier kannst du nahtlos bis zu 100 Fragen ergänzen!
-        // =========================================================================
+        // DIE VOLLSTÄNDIGE FRAGENDATENBANK AUS DEINEN ORIGINAL-PDF-EXTRAKTEN
         const fragenDatenbank = [
-            {
-                kategorie: "Genetik",
-                unterkategorie: "Karyogramm & Chromosomen",
-                frage: "Was versteht man unter einem Karyogramm und wie unterscheidet sich der Chromosomensatz von Mann und Frau?",
-                antwort: "Ein Karyogramm ist das geordnete Bild aller Chromosomen einer Zelle während der Metaphase. Beim Menschen gibt es 46 Chromosomen (23 Paare).\n\nUnterschied: Die ersten 22 Paare (Autosomen) sind bei Mann und Frau gleich. Das 23. Paar sind die Gonosomen (Geschlechtschromosomen). Frauen haben zwei X-Chromosomen (XX), Männer ein X- und ein kleineres Y-Chromosom (XY).",
-                begriffe: ["Karyogramm", "Autosomen", "Gonosomen", "XX-Chromosomen", "XY-Chromosomen"]
-            },
-            {
-                kategorie: "Genetik",
-                unterkategorie: "Mitose (Zellteilung)",
-                frage: "Nenne die 4 Phasen der Mitose und beschreibe kurz, was in der Anaphase passiert.",
-                antwort: "Die Phasen heißen Prophase, Metaphase, Anaphase und Telophase.\n\nIn der Anaphase werden die Zwei-Chromatid-Chromosomen am Centromer getrennt. Die Spindelfasern verkürzen sich und ziehen die Ein-Chromatid-Chromosomen zu den entgegengesetzten Polen der Zelle. Dadurch erhält jeder Pol einen identischen Satz Erbinformationen.",
-                begriffe: ["Prophase", "Metaphase", "Anaphase", "Telophase", "Spindelfaserapparat", "Centromer"]
-            },
-            {
-                kategorie: "Ökologie",
-                unterkategorie: "Abiotische Faktoren",
-                frage: "Erkläre das 'Gesetz des Minimums' (Minimumgesetz) anhand eines Beispiels.",
-                antwort: "Das Minimumgesetz (von Justus von Liebig) besagt, dass das Wachstum von Pflanzen durch diejenige Ressource begrenzt wird, die im Verhältnis zum Bedarf in der geringsten Menge vorhanden ist (Knappster Faktor).\n\nBeispiel: Selbst wenn eine Pflanze perfekt mit Licht, Wasser und Stickstoff versorgt ist, kann sie nicht weiter wachsen, wenn es ihr an Magnesium fehlt. Magnesium ist hier der Minimumfaktor.",
-                begriffe: ["Minimumgesetz", "Minimumfaktor", "Liebigsches Fass", "Wachstumsbegrenzung"]
-            }
-            // Tipp: Kopiere einfach den obigen Block, setze ein Komma dazwischen und füge deine weiteren Fragen hier ein!
-        ];
-
-        let aktuelleFragen = [];
-        let index = 0;
-        let gewusstZaehler = 0;
-        let aktuellerModus = 'flashcard';
-
-        function initQuiz() {
-            if(aktuellerModus === 'flashcard') {
-                aktuelleFragen = [...fragenDatenbank];
-                document.getElementById('status-right').innerText = "Modus: Alle Karteikarten";
-            } else {
-                // Zieht für die Prüfungssimulation zufällig 10 Fragen aus dem Pool
-                aktuelleFragen = [...fragenDatenbank].sort(() => 0.5 - Math.random()).slice(0, 10);
-                document.getElementById('status-right').innerText = "Modus: Random Prüfung (10 Qs)";
-            }
-            index = 0;
-            gewusstZaehler = 0;
-            document.getElementById('quiz-section').classList.remove('hidden');
-            document.getElementById('result-section').classList.add('hidden');
-            showFrage();
-        }
-
-        function showFrage() {
-            if(index >= aktuelleFragen.length) {
-                endQuiz();
-                return;
-            }
-
-            const f = aktuelleFragen[index];
-            document.getElementById('category').innerText = f.kategorie;
-            document.getElementById('subcategory').innerText = f.unterkategorie;
-            document.getElementById('question').innerText = f.frage;
-            document.getElementById('answer').innerText = f.antwort;
-
-            const kwContainer = document.getElementById('keywords');
-            kwContainer.innerHTML = '';
-            f.begriffe.forEach(b => {
-                const badge = document.createElement('span');
-                badge.className = 'keyword-badge';
-                badge.innerText = b;
-                kwContainer.appendChild(badge);
-            });
-
-            document.getElementById('answer-box').classList.remove('visible');
-            document.getElementById('initial-actions').classList.remove('hidden');
-            document.getElementById('feedback-actions').classList.add('hidden');
-
-            document.getElementById('status-left').innerText = `Frage: ${index + 1}/${aktuelleFragen.length}`;
-            const prozent = (index / aktuelleFragen.length) * 100;
-            document.getElementById('progress').style.width = `${prozent}%`;
-        }
-
-        function revealAnswer() {
-            document.getElementById('answer-box').classList.add('visible');
-            document.getElementById('initial-actions').classList.add('hidden');
-            document.getElementById('feedback-actions').classList.remove('hidden');
-        }
-
-        function submitFeedback(warRichtig) {
-            if(warRichtig) gewusstZaehler++;
-            index++;
-            showFrage();
-        }
-
-        function switchMode(modus) {
-            aktuellerModus = modus;
-            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
-            initQuiz();
-        }
-
-        function endQuiz() {
-            document.getElementById('quiz-section').classList.add('hidden');
-            document.getElementById('result-section').classList.remove('hidden');
-            
-            const prozent = Math.round((gewusstZaehler / aktuelleFragen.length) * 100);
-            document.getElementById('score-display').innerText = `${prozent}%`;
-            document.getElementById('progress').style.width = `100%`;
-
-            let note = "";
-            if(prozent >= 90) note = "Note: 1 - Sensationell!";
-            else if(prozent >= 75) note = "Note: 2 - Sehr gut vorbereitet!";
-            else if(prozent >= 55) note = "Note: 3 - Solide, lern weiter!";
-            else note = "Note: 4 oder schlechter - Wiederhole die Fachbegriffe!";
-
-            document.getElementById('result-text').innerHTML = `Ergebnis: <b>${gewusstZaehler} von ${aktuelleFragen.length}</b> richtig gewusst.<br><br>${note}`;
-        }
-
-        function restartQuiz() {
-            initQuiz();
-        }
-
-        window.onload = initQuiz;
-    </script>
-</body>
-</html>
+            // ZELLBIOLOGIE & GENETIK
+            { kategorie: "Zellbiologie & Genetik", unterkategorie: "Mitose", frage: "Welche biologische Bedeutung hat die Mitose und wie lauten ihre Phasen?", antwort: "Die Mitose sorgt für das Wachstum des Organismus sowie für die Erneuerung und Reparatur verletzter oder gealterter Körperzellen. Dabei entstehen aus einer Mutterzelle zwei genet
